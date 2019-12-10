@@ -1,5 +1,3 @@
-using System;
-
 namespace DncConfigurationsAndOptions.Models
 {
     public class ErrorViewModel

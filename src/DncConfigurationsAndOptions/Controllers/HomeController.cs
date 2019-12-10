@@ -1,26 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DncConfigurationsAndOptions.Models;
+using DncConfigurationsAndOptions.ViewModels;
+using Microsoft.Extensions.Configuration;
 
 namespace DncConfigurationsAndOptions.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IConfiguration _configuration;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            IConfiguration configuration,
+            ILogger<HomeController> logger)
         {
-            _logger = logger;
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public IActionResult Index()
         {
-            return View();
+            var configurations = new Configurations
+            {
+                Example1 = new Example1
+                {
+                    SiteConfiguration = new SiteConfiguration
+                    {
+                        BaseUrl = _configuration["Example1:SiteConfiguration:BaseUrl"]
+                    }
+                }
+            };
+            return View(configurations);
         }
 
         public IActionResult Privacy()
