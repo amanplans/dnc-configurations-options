@@ -24,14 +24,9 @@ namespace Example1.Controllers
         {
             var configurations = new Configurations
             {
-                Example1 = new Models.Example1
-                {
-                    SiteConfiguration = new SiteConfiguration
-                    {
-                        BaseUrl = _configuration["Example1:SiteConfiguration:BaseUrl"]
-                    }
-                }
+                BaseUrl = _configuration["Example1:SiteConfiguration:BaseUrl"]
             };
+
             return View(configurations);
         }
 

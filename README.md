@@ -74,3 +74,87 @@ public HomeController(
 
 Now we can read the BaseUrl from the `application.json` file within the Index method.
 
+First we create the class `Configurations.cs` in the `Models` folder.
+
+```csharp
+public class Configurations
+{
+    public string BaseUrl { get; set; }
+
+    public string Key { get; set; }
+}
+```
+
+The `BaseUrl` is within the section `SiteConfiguration` which is within the section `Example1`.
+To traverse the sections we make use of the colon `:`. We have two sections so we use two `:`, as in
+
+```csharp
+var configurations = new Configurations
+{
+    BaseUrl = _configuration["Example1:SiteConfiguration:BaseUrl"]
+};
+```
+
+We assign `configurations` as the model in the line
+
+```csharp
+    return View(configurations);
+```
+
+The `Index` method should look like
+
+```csharp
+public IActionResult Index()
+{
+    var configurations = new Configurations
+    {
+        BaseUrl = _configuration["Example1:SiteConfiguration:BaseUrl"]
+    };
+
+    return View(configurations);
+}
+```
+
+Now we can show the `BaseUrl` in the view. Open `Views\Index.html`.
+
+We add at the first line
+
+```html
+@model Configurations
+```
+
+We add
+```html
+<p>BaseUrl: @Model.BaseUrl</p>
+```
+
+before the closing `</div>`
+
+The `Index.html` file will look like
+
+```html
+@model Configurations
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>BaseUrl: @Model.BaseUrl</p>
+</div>
+```
+
+Now you can start the project with 'F5' and see the result
+
+```
+BaseUrl: https://www.example1.com
+```
+
+
+
+You can read more at:
+- [Configurations in ASP.NET Core - Microsoft docs](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.1)
+- [Options pattern in ASP.NET Core - Microsoft docs](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-3.1)
+- [Using Configuration and Options in .NET Core and ASP.NET Core Apps - PluralSight](https://app.pluralsight.com/library/courses/dotnet-core-aspnet-core-configuration-options/table-of-contents)
