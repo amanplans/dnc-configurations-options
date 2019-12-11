@@ -154,6 +154,9 @@ BaseUrl: https://www.example1.com
 
 
 
+Configurations in Progam.cs
+IOptionsFactory for unit test
+
 You can read more at:
 - [Configurations in ASP.NET Core - Microsoft docs](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.1)
 - [Options pattern in ASP.NET Core - Microsoft docs](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-3.1)
