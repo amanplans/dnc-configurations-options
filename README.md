@@ -270,13 +270,13 @@ The `Index.html` file will look like
 </div>
 ```
 
-
-
-Validation use data annotations
-UserSecrets
-KeyVault
-Configurations in Progam.cs
-IOptionsFactory for unit test
+## Example 3 
+Validation configuration using data annotations
+  
+UserSecrets  
+KeyVault  
+Configurations in Progam.cs  
+IOptionsFactory for unit test  
 
 You can read more at:
 - [Configurations in ASP.NET Core - Microsoft docs](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.1)
