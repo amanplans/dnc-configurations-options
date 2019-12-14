@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example1", "src\Example1\Ex
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example2", "src\Example2\Example2.csproj", "{12A10E50-C945-47B3-96A9-559A414F7627}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example3", "Example3\Example3.csproj", "{A3AF1A41-7E69-49CF-BC8B-F8BD30C4B962}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example3", "src\Example3\Example3.csproj", "{A3AF1A41-7E69-49CF-BC8B-F8BD30C4B962}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
