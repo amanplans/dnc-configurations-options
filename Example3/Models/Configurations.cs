@@ -1,4 +1,6 @@
-﻿namespace Example3.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Example3.Models
 {
     public class Configurations
     {
@@ -12,8 +14,10 @@
 
     public class SiteConfiguration
     {
+        [Required(ErrorMessage = "The BaseUrl is required for the SiteConfiguration section")]
         public string BaseUrl { get; set; }
 
+        [Required(ErrorMessage = "The Key is required for the SiteConfiguration section")]
         public string Key { get; set; }
     }
 }

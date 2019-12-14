@@ -140,7 +140,7 @@ The `Index.html` file will look like
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Welcome in Example 1</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p>BaseUrl: @Model.BaseUrl</p>
 </div>
@@ -264,7 +264,7 @@ The `Index.html` file will look like
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Welcome in Example 2</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p>BaseUrl: @Model.Example2.SiteConfiguration.BaseUrl</p>
 </div>
