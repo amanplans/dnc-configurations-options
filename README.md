@@ -272,7 +272,7 @@ The `Index.html` file will look like
 
 ## Example 3 
 Validation configuration using data annotations
-  
+
 UserSecrets  
 KeyVault  
 Configurations in Progam.cs  

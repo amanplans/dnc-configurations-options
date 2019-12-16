@@ -1,3 +1,4 @@
+using Example3.Models;
 using Example3.Validations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,13 +20,15 @@ namespace Example3
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddOptions<Models.Example3>()
-            //    .Bind(Configuration.GetSection(typeof(Models.Example3).Name))
-            //    .ValidateDataAnnotations();
+            // services.Configure<SiteConfiguration>(Configuration.GetSection(nameof(SiteConfiguration)));
 
-            services.AddOptions<Models.Example3>()
-                .Bind(Configuration.GetSection("Example3:SiteConfiguration"))
+            services.AddOptions<SiteConfiguration>()
+                .Bind(Configuration.GetSection(nameof(SiteConfiguration)))
                 .ValidateDataAnnotations();
+
+            //services.AddOptions<Models.Example3>()
+            //    .Bind(Configuration.GetSection("Example3:SiteConfiguration"))
+            //    .ValidateDataAnnotations();
 
             // Do not forget tot add new Settings to the ValidateOptionsService
             services.AddHostedService<ValidateOptionsService>();

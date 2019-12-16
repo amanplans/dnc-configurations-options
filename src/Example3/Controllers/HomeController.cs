@@ -8,14 +8,14 @@ namespace Example3.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly Models.Example3 _example3;
+        private readonly Models.SiteConfiguration _siteConfiguration;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(
-            IOptions<Models.Example3> settings,
+            IOptions<Models.SiteConfiguration> settings,
             ILogger<HomeController> logger)
         {
-            _example3 = settings.Value;
+            _siteConfiguration = settings.Value;
             _logger = logger;
         }
 
@@ -23,8 +23,14 @@ namespace Example3.Controllers
         {
             var configurations = new Configurations
             {
-                Example3 = _example3
+                Example3 = new Models.Example3()
             };
+
+            configurations.Example3.SiteConfiguration = _siteConfiguration;
+
+            //configurations.Example3.SiteConfiguration.BaseUrl = _example3.SiteConfiguration.BaseUrl;
+
+            //var baseUrl = _example3.SiteConfiguration.BaseUrl;
 
             return View(configurations);
         }

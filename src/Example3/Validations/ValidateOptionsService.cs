@@ -10,12 +10,12 @@ namespace Example3.Validations
     public class ValidateOptionsService : IHostedService
     {
         private readonly IHostApplicationLifetime _hostApplicationLifetime;
-        private readonly IOptions<Models.Example3> _settings;
+        private readonly IOptions<Models.SiteConfiguration> _settings;
         private readonly ILogger<ValidateOptionsService> _logger;
 
         public ValidateOptionsService(
             IHostApplicationLifetime hostApplicationLifetime,
-            IOptions<Models.Example3> settings,
+            IOptions<Models.SiteConfiguration> settings,
             ILogger<ValidateOptionsService> logger
             )
         {
