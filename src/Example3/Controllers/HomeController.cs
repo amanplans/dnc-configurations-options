@@ -8,11 +8,11 @@ namespace Example3.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly Models.SiteConfiguration _siteConfiguration;
+        private readonly SiteConfiguration _siteConfiguration;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(
-            IOptions<Models.SiteConfiguration> settings,
+            IOptions<SiteConfiguration> settings,
             ILogger<HomeController> logger)
         {
             _siteConfiguration = settings.Value;
@@ -27,10 +27,6 @@ namespace Example3.Controllers
             };
 
             configurations.Example3.SiteConfiguration = _siteConfiguration;
-
-            //configurations.Example3.SiteConfiguration.BaseUrl = _example3.SiteConfiguration.BaseUrl;
-
-            //var baseUrl = _example3.SiteConfiguration.BaseUrl;
 
             return View(configurations);
         }

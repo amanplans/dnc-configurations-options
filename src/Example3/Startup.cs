@@ -20,18 +20,12 @@ namespace Example3
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.Configure<SiteConfiguration>(Configuration.GetSection(nameof(SiteConfiguration)));
-
             services.AddOptions<SiteConfiguration>()
-                .Bind(Configuration.GetSection(nameof(SiteConfiguration)))
+                .Bind(Configuration.GetSection("Example3:SiteConfiguration"))
                 .ValidateDataAnnotations();
 
-            //services.AddOptions<Models.Example3>()
-            //    .Bind(Configuration.GetSection("Example3:SiteConfiguration"))
-            //    .ValidateDataAnnotations();
-
             // Do not forget tot add new Settings to the ValidateOptionsService
-            services.AddHostedService<ValidateOptionsService>();
+            //services.AddHostedService<ValidateOptionsService>();
 
             services.AddControllersWithViews();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Example3.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -10,12 +11,12 @@ namespace Example3.Validations
     public class ValidateOptionsService : IHostedService
     {
         private readonly IHostApplicationLifetime _hostApplicationLifetime;
-        private readonly IOptions<Models.SiteConfiguration> _settings;
+        private readonly IOptions<SiteConfiguration> _settings;
         private readonly ILogger<ValidateOptionsService> _logger;
 
         public ValidateOptionsService(
             IHostApplicationLifetime hostApplicationLifetime,
-            IOptions<Models.SiteConfiguration> settings,
+            IOptions<SiteConfiguration> settings,
             ILogger<ValidateOptionsService> logger
             )
         {
