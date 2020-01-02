@@ -338,7 +338,7 @@ services.AddOptions<SiteConfiguration>()
                 .ValidateDataAnnotations();
 ```
 
-We have to call explicitly `"Example3:SiteConfiguration"`. Another option if to remove `Example3` 
+We have to call explicitly `"Example3:SiteConfiguration"`. Another option is to remove the `Example3` 
 outer section in `appsettings.json`.
 
 ```json
@@ -435,6 +435,54 @@ In order to trigger validation when the project is starting we have to add the f
 ![Example 3 Add Package](readme-images/example-3-add-package.png)
 
 **Step 2**
+We have to add another Controller in order to see that the error will not be triggered. 
+I assume you know how to create a new Controller. 
+We name the controller `WeatherController`. The controller has only 1 method which returns the index.
+
+```csharp
+public class WeatherController : Controller
+{
+	// GET: Weather
+	public ActionResult Index()
+	{
+		return View();
+	}
+}
+```
+
+The `View` associated in the Index method is in the folder `Views\Weather` and named `Index.cshtml`.
+
+```html
+@{
+    ViewData["Title"] = "Weather";
+}
+
+<h2>title</h2>
+<p>What a beautiful day</p>
+```
+
+We want change the `launchSettings` to navigate to this page. We open `Properties` and edit `launchSettings.json`.
+
+![Example 3 Properties Launchsettings](readme-images/example-3-properties-launchsettings.png)
+
+We add the line `"launchUrl": "https://localhost:44369/weather/"` to the `IIS Express` section.
+
+```json
+"IIS Express": {
+  "commandName": "IISExpress",
+  "launchBrowser": true,
+  "launchUrl": "https://localhost:44369/weather/",
+  "environmentVariables": {
+	"ASPNETCORE_ENVIRONMENT": "Development"
+  }
+},
+```
+
+When we start the project. We see that the application works fine. If we press the `Home`-link, 
+the familiar Error-page is shown. We want to check if the required settings are set during startup, 
+which brings us to step 3.
+
+**Step 3**
 
 Create the folder `Validations`. Create the class `ValidateOptionsService` in it. 
 Implement the interface `IHostedService`. Generate the methods we have to implement.
@@ -470,7 +518,7 @@ The parameter `IOptions<SiteConfiguration> settings` is the one we want to valid
 We added a logger to output the exceptions to the `Output` window or 
 we can log it in `Application Insights`, which is outside the scope of this tutorial.
 
-We implement the two methods `IHostedService` require
+We implement the two methods `StartAsync` and `StopAsync` which the interface `IHostedService` require
 
 ```csharp
 public Task StartAsync(CancellationToken cancellationToken)
@@ -500,12 +548,65 @@ public Task StopAsync(CancellationToken cancellationToken)
 }
 ```
 
-In 
+In `Startup.cs` add the following lines to the method `ConfigureServices`
 
-UserSecrets  
-KeyVault  
+```csharp
+// Do not forget tot add new Settings to the ValidateOptionsService
+services.AddHostedService<ValidateOptionsService>();
+```
+
+which results in
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+	services.AddOptions<SiteConfiguration>()
+		.Bind(Configuration.GetSection("Example3:SiteConfiguration"))
+		.ValidateDataAnnotations();
+
+	// Do not forget tot add new Settings to the ValidateOptionsService
+	services.AddHostedService<ValidateOptionsService>();
+
+	services.AddControllersWithViews();
+}
+```
+
+When we start the project, `ValidateOptionsService` will be triggered and the required settings of
+`SiteConfiguration` will be checked and in the `Output` window we will see the following error:
+
+![Example 3 Missing Baseurl](readme-images/example-3-missing-baseurl.png)
+
+Pitfall 3: If you add new settings, for example for your `Storage` like `Azure CosmosDB`. You create a
+`StorageSettings` class and decorate the properties with the `Required` attribute. 
+In order to trigger the validation in `ValidateOptionsService`, you have to add a parameter to the constructor
+
+```csharp
+IOptions<StorageConfiguration> storageSettings
+```
+
+And trigger the validation in the `StartAsync` method in the `try` block with
+
+```csharp
+_ = _storageSettings.Value;
+```
+
+## Summary
+In this tutorial we have seen how we can read one setting in `Example 1`:
+
+```csharp
+_configuration["Example1:SiteConfiguration:BaseUrl"]
+```
+
+In `Example 2` we have seen how we can map settings to classes.
+In `Example 3` we have seen how we can validate required settings during startup of the application.
+
+In another tutorial I will discuss `UserSecrets` and the `Azure KeyVault` because 
+storing our secrets in source code is a vulnerability.
+
 Configurations in Progam.cs  
 IOptionsFactory for unit test  
+AppSettings appSettings = new AppSettings() { ConnectionString = "..." };
+IOptions<AppSettings> options = Options.Create(appSettings);
 
 You can read more at:
 - [Configurations in ASP.NET Core - Microsoft docs](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.1)

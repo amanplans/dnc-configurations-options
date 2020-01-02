@@ -25,7 +25,7 @@ namespace Example3
                 .ValidateDataAnnotations();
 
             // Do not forget tot add new Settings to the ValidateOptionsService
-            //services.AddHostedService<ValidateOptionsService>();
+            services.AddHostedService<ValidateOptionsService>();
 
             services.AddControllersWithViews();
         }
