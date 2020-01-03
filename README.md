@@ -601,12 +601,7 @@ In `Example 2` we have seen how we can map settings to classes.
 In `Example 3` we have seen how we can validate required settings during startup of the application.
 
 In another tutorial I will discuss `UserSecrets` and the `Azure KeyVault` because 
-storing our secrets in source code is a vulnerability.
-
-Configurations in Progam.cs  
-IOptionsFactory for unit test  
-AppSettings appSettings = new AppSettings() { ConnectionString = "..." };
-IOptions<AppSettings> options = Options.Create(appSettings);
+storing our secrets in source code is a severe vulnerability.
 
 You can read more at:
 - [Configurations in ASP.NET Core - Microsoft docs](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.1)

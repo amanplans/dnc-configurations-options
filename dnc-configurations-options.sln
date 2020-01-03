@@ -10,13 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E2A886D4-81D2-491F-9C07-D92DDA172735}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tst", "tst", "{4BD7542D-31B3-4277-9498-5369F6945F4B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example1", "src\Example1\Example1.csproj", "{B07C35E3-F222-42C3-BDC4-F065CAC87DBB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example2", "src\Example2\Example2.csproj", "{12A10E50-C945-47B3-96A9-559A414F7627}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example3", "src\Example3\Example3.csproj", "{A3AF1A41-7E69-49CF-BC8B-F8BD30C4B962}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example3", "src\Example3\Example3.csproj", "{A3AF1A41-7E69-49CF-BC8B-F8BD30C4B962}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
