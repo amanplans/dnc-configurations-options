@@ -1,7 +1,7 @@
 # .NET Core 3.1 - Configurations
 
-In this solution we explore how we can configure settings. The examples make use of .NET Core 3.1.
-In all examples we make use of the configuration rpvoider from `Microsoft.Extensions.Configuration`.
+In this solution, we explore how we can configure settings. The examples, make use of .NET Core 3.1.
+In all examples we make use of the configuration provider from `Microsoft.Extensions.Configuration`.
 
 ## Example 1
 In the `application.settings.json` file, place the following section:
@@ -36,22 +36,17 @@ So the file looks like:
 }
 ```
 
-In this first example we make use of dependency injection to inject the configuration in the HomeController. 
+In this first example, we make use of dependency injection to inject the configuration in the HomeController. 
 During Startup the default implementation of `IConfiguration` will be retrieved and assigned to `_configuration`.
 
-Add
-
-```csharp
-IConfiguration configuration
-```
-
-as a parameter in the constructor. Add the field above the contructor.
+Add `IConfiguration configuration` as a parameter in the constructor and
+add the field above the constructor.
 
 ```csharp
 private readonly IConfiguration _configuration;
 ```
 
-Initialize the readonly field `_configuration`
+Initialize the read-only field `_configuration`
 
 ```csharp
 _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
@@ -151,7 +146,7 @@ Now you can start the project with 'F5' and see the result
 ![Example 1 Home Page](readme-images/example-1-home-page.png)
 
 ## Example 2
-In this example we will make use of Options pattern. We change the Configurations class in the `Models` folder to
+In this example, we will make use of Options pattern. We change the Configurations class in the `Models` folder to
 
 ```csharp
 public class Configurations
@@ -239,7 +234,7 @@ public IActionResult Index()
 
 Now we can show the `BaseUrl` in the view. Open `Views\Index.html`.
 
-We add at the first line
+We add the model on the first line
 
 ```html
 @model Configurations
@@ -252,7 +247,7 @@ We add
 
 before the closing `</div>`
 
-The `Index.html` file will look like
+The `Index.chtml` file will look like
 
 ```html
 @model Configurations
@@ -268,9 +263,10 @@ The `Index.html` file will look like
 </div>
 ```
 
+![Example 2 Home Page](readme-images/example-2-home-page.png)
 ## Example 3 
-In this example we will validate when settings are missing. We start with the following settings in 
-`application.json` where `BaseUrl` is commented out.
+In this example, we will validate when settings are missing. We start with the following settings in 
+`appsettings.json` where `BaseUrl` is commented out.
 
 ```json
 {
@@ -435,6 +431,7 @@ In order to trigger validation when the project is starting we have to add the f
 ![Example 3 Add Package](readme-images/example-3-add-package.png)
 
 **Step 2**
+
 We have to add another Controller in order to see that the error will not be triggered. 
 I assume you know how to create a new Controller. 
 We name the controller `WeatherController`. The controller has only 1 method which returns the index.
@@ -461,7 +458,7 @@ The `View` associated in the Index method is in the folder `Views\Weather` and n
 <p>What a beautiful day</p>
 ```
 
-We want change the `launchSettings` to navigate to this page. We open `Properties` and edit `launchSettings.json`.
+We change the `launchSettings` to navigate to this page. We open `Properties` and edit `launchSettings.json`.
 
 ![Example 3 Properties Launchsettings](readme-images/example-3-properties-launchsettings.png)
 
@@ -591,16 +588,16 @@ _ = _storageSettings.Value;
 ```
 
 ## Summary
-In this tutorial we have seen how we can read one setting in `Example 1`:
+In this tutorial, we have seen how we can read one setting in `Example 1`:
 
 ```csharp
 _configuration["Example1:SiteConfiguration:BaseUrl"]
 ```
 
 In `Example 2` we have seen how we can map settings to classes.
-In `Example 3` we have seen how we can validate required settings during startup of the application.
+In `Example 3` we have seen how we can validate required settings during the startup of the application.
 
-In another tutorial I will discuss `UserSecrets` and the `Azure KeyVault` because 
+In another tutorial, I will discuss `UserSecrets` and the `Azure KeyVault` because 
 storing our secrets in source code is a severe vulnerability.
 
 You can read more at:
